@@ -51,8 +51,8 @@ namespace API_Games_Genres.Migrations
                     b.Property<int>("NumberOfTournamentsPlayed")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartedPlaying")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("StartedPlaying")
+                        .HasColumnType("int");
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -73,7 +73,7 @@ namespace API_Games_Genres.Migrations
                             MoneyWon = 500,
                             NickName = "Aldra1n",
                             NumberOfTournamentsPlayed = 3,
-                            StartedPlaying = new DateTime(2022, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartedPlaying = 2013,
                             TeamId = 1
                         },
                         new
@@ -85,7 +85,7 @@ namespace API_Games_Genres.Migrations
                             MoneyWon = 10000,
                             NickName = "Filadelfie",
                             NumberOfTournamentsPlayed = 15,
-                            StartedPlaying = new DateTime(2022, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartedPlaying = 2015,
                             TeamId = 1
                         });
                 });
@@ -127,7 +127,7 @@ namespace API_Games_Genres.Migrations
                         new
                         {
                             TeamId = 1,
-                            CreationDate = new DateTime(2022, 4, 11, 17, 43, 48, 718, DateTimeKind.Local).AddTicks(2959),
+                            CreationDate = new DateTime(2022, 4, 11, 21, 14, 40, 882, DateTimeKind.Local).AddTicks(878),
                             MembersCount = 5,
                             MoneyWon = 5000,
                             Name = "Liquid",
@@ -137,7 +137,7 @@ namespace API_Games_Genres.Migrations
                         new
                         {
                             TeamId = 2,
-                            CreationDate = new DateTime(2022, 4, 11, 17, 43, 48, 718, DateTimeKind.Local).AddTicks(3019),
+                            CreationDate = new DateTime(2022, 4, 11, 21, 14, 40, 882, DateTimeKind.Local).AddTicks(936),
                             MembersCount = 8,
                             MoneyWon = 100,
                             Name = "MeXXeSSovi Kamarádi",

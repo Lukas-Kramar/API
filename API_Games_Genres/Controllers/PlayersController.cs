@@ -24,9 +24,21 @@ namespace API_Games_Genres.Controllers
 
         // GET: api/Players
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
+        public async Task<ActionResult<IEnumerable<Player>>> GetPlayers(int startedPlaying, string teamName)
         {
-            return await _context.Players.ToListAsync();
+            var players = await _context.Players
+                .Include(p => p.Team)
+                .ToListAsync();
+
+            if(teamName != null)
+            {
+                players = players.Where(p => p.Team.Name == teamName).ToList();
+            }
+            if (startedPlaying != 0)
+            {
+                players = players.Where(p => p.StartedPlaying == startedPlaying).ToList();
+            }
+            return players; //return OK(players) ???
         }
 
         // GET: api/Players/5
@@ -43,13 +55,31 @@ namespace API_Games_Genres.Controllers
             return player;
         }
 
-        // GET: api/Players/5
-        [HttpGet("/count")]
-        public async Task<IActionResult> GetNumberOfTeams()
+        // POST: api/Players
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Player>> PostPlayer(Player player)
         {
-            var count = await _context.Teams.ToArrayAsync();
+            _context.Players.Add(player);
+            await _context.SaveChangesAsync();
 
-            return Ok(count.Length);
+            return CreatedAtAction("GetPlayer", new { id = player.PlayerId }, player);
+        }
+
+        // DELETE: api/Players/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePlayer(int id)
+        {
+            var player = await _context.Players.FindAsync(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            _context.Players.Remove(player);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
         // PUT: api/Players/5
@@ -82,30 +112,32 @@ namespace API_Games_Genres.Controllers
 
             return NoContent();
         }
-
-        // POST: api/Players
+        // PUT: api/Players/5  
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Player>> PostPlayer(Player player)
-        {
-            _context.Players.Add(player);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPlayer", new { id = player.PlayerId }, player);
-        }
-
-        // DELETE: api/Players/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePlayer(int id)
+        [HttpPut("{id}/BiggestAchievement")]
+        public async Task<IActionResult> UpdateBiggetAchievement(int id, int amount)
         {
             var player = await _context.Players.FindAsync(id);
-            if (player == null)
-            {
-                return NotFound();
-            }
+            
+            if (amount > player.BiggestPrizeWon) { player.BiggestPrizeWon = amount; } else { return BadRequest(/*$"Your amount isn´t bigger than {player.BiggestPrizeWon}"*/); }
 
-            _context.Players.Remove(player);
-            await _context.SaveChangesAsync();
+            _context.Entry(player).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PlayerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
         }

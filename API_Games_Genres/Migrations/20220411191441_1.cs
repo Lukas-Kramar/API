@@ -37,7 +37,7 @@ namespace API_Games_Genres.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NickName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartedPlaying = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartedPlaying = table.Column<int>(type: "int", nullable: false),
                     MoneyWon = table.Column<int>(type: "int", nullable: false),
                     NumberOfTournamentsPlayed = table.Column<int>(type: "int", nullable: false),
                     BiggestPrizeWon = table.Column<int>(type: "int", nullable: false)
@@ -56,22 +56,22 @@ namespace API_Games_Genres.Migrations
             migrationBuilder.InsertData(
                 table: "Teams",
                 columns: new[] { "TeamId", "CreationDate", "MembersCount", "MoneyWon", "Name", "Owner", "Place" },
-                values: new object[] { 1, new DateTime(2022, 4, 11, 17, 43, 48, 718, DateTimeKind.Local).AddTicks(2959), 5, 5000, "Liquid", "Pepek", "Praha" });
+                values: new object[] { 1, new DateTime(2022, 4, 11, 21, 14, 40, 882, DateTimeKind.Local).AddTicks(878), 5, 5000, "Liquid", "Pepek", "Praha" });
 
             migrationBuilder.InsertData(
                 table: "Teams",
                 columns: new[] { "TeamId", "CreationDate", "MembersCount", "MoneyWon", "Name", "Owner", "Place" },
-                values: new object[] { 2, new DateTime(2022, 4, 11, 17, 43, 48, 718, DateTimeKind.Local).AddTicks(3019), 8, 100, "MeXXeSSovi Kamarádi", "NeeX", "Brno" });
+                values: new object[] { 2, new DateTime(2022, 4, 11, 21, 14, 40, 882, DateTimeKind.Local).AddTicks(936), 8, 100, "MeXXeSSovi Kamarádi", "NeeX", "Brno" });
 
             migrationBuilder.InsertData(
                 table: "Players",
                 columns: new[] { "PlayerId", "BiggestPrizeWon", "FirstName", "LastName", "MoneyWon", "NickName", "NumberOfTournamentsPlayed", "StartedPlaying", "TeamId" },
-                values: new object[] { 1, 300, "Jouda", "Špatný", 500, "Aldra1n", 3, new DateTime(2022, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), 1 });
+                values: new object[] { 1, 300, "Jouda", "Špatný", 500, "Aldra1n", 3, 2013, 1 });
 
             migrationBuilder.InsertData(
                 table: "Players",
                 columns: new[] { "PlayerId", "BiggestPrizeWon", "FirstName", "LastName", "MoneyWon", "NickName", "NumberOfTournamentsPlayed", "StartedPlaying", "TeamId" },
-                values: new object[] { 2, 8000, "Jarmil", "Holohlavý", 10000, "Filadelfie", 15, new DateTime(2022, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), 1 });
+                values: new object[] { 2, 8000, "Jarmil", "Holohlavý", 10000, "Filadelfie", 15, 2015, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamId",

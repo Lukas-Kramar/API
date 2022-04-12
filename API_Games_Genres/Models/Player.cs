@@ -5,16 +5,14 @@ namespace API_Games_Genres.Models
 {
     public class Player
     {
-        public int PlayerId { get; set; }
+        public int PlayerId { get; set; }        
+        public int? TeamId { get; set; }
         [JsonIgnore]
-        public int TeamId { get; set; }
-        [JsonIgnore]
-        [ForeignKey("TeamId")]
         public Team Team { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NickName { get; set; }
-        public DateTime StartedPlaying { get; set; }
+        public int StartedPlaying { get; set; }
         public int MoneyWon { get; set; }
         public int NumberOfTournamentsPlayed { get; set; }
         public int BiggestPrizeWon { get; set; }
