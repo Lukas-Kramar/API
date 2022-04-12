@@ -25,9 +25,16 @@ namespace API_Games_Genres.Controllers
 
         // GET: api/Teams
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
+        public async Task<ActionResult<IEnumerable<Team>>> GetTeams(string country)
         {
-            return await _context.Teams.ToListAsync();
+            var teams = await _context.Teams.ToListAsync();
+
+            if (country == null)
+            {
+                return teams;
+            }
+
+            return teams.Where(t => t.Place == country).ToList();
         }
 
         // GET: api/Teams/5
@@ -42,20 +49,6 @@ namespace API_Games_Genres.Controllers
             }
 
             return team;
-        }
-
-        // GET: api/Teams/Czech Republic
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Team>>> GetTeamsFrom(string country)
-        {
-            var teams = await _context.Teams.ToListAsync();
-
-            if (country == null)
-            {
-                return BadRequest();
-            }
-
-            return teams.Where(t => t.Place == country).ToList();
         }
 
         // GET: api/Teams/2/Players
