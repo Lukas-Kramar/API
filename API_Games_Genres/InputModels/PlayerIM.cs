@@ -3,12 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace API_Games_Genres.Models
 {
-    public class Player
+    public class PlayerIM
     {
-        public int PlayerId { get; set; }        
-        public int? TeamId { get; set; }
-        [JsonIgnore]
-        public Team? Team { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NickName { get; set; }

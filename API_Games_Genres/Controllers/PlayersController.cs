@@ -58,8 +58,18 @@ namespace API_Games_Genres.Controllers
         // POST: api/Players
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Player>> PostPlayer(Player player)
+        public async Task<ActionResult<Player>> PostPlayer(PlayerIM playerIM)
         {
+            Player player = new Player();
+            player.FirstName = playerIM.FirstName;
+            player.LastName = playerIM.LastName;
+            player.NickName = playerIM.NickName;
+            player.StartedPlaying = playerIM.StartedPlaying;
+            player.MoneyWon = playerIM.MoneyWon;
+            player.NumberOfTournamentsPlayed = playerIM.NumberOfTournamentsPlayed;
+            player.BiggestPrizeWon = playerIM.BiggestPrizeWon;
+           
+            
             _context.Players.Add(player);
             await _context.SaveChangesAsync();
 

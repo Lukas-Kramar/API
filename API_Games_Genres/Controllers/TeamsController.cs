@@ -69,8 +69,19 @@ namespace API_Games_Genres.Controllers
         // POST: api/Teams
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Team>> PostTeam(Team team)
+        public async Task<ActionResult<Team>> PostTeam(TeamIM teamIM)
         {
+            Team team = new Team
+            {
+                Place = teamIM.Place,
+                Name = teamIM.Name,
+                CreationDate = teamIM.CreationDate,
+                MembersCount = teamIM.MembersCount,
+                MoneyWon = teamIM.MoneyWon,
+                Owner = teamIM.Owner,
+                Players = new List<Player>(),
+
+            }; 
             _context.Teams.Add(team);
             await _context.SaveChangesAsync();
 
