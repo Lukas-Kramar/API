@@ -32,7 +32,7 @@ namespace API_Games_Genres.Controllers
 
             if(teamName != null)
             {
-                players = players.Where(p => p.Team.Name == teamName).ToList();
+                players = players.Where(p => p.Team != null).Where(p => p.Team.Name == teamName).ToList();
             }
             if (startedPlaying != 0)
             {
